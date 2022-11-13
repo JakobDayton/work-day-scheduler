@@ -6,10 +6,15 @@ var hour10 = $("#hour-10");
 var hour11 = $("#hour-11");
 var hour12 = $("#hour-12");
 var hour13 = $("#hour-13");
+var hour14 = $("#hour-14");
+var hour15 = $("#hour-15");
+var hour16 = $("#hour-16");
+var hour17 = $("#hour-17");
 
+var index = 0;
 
 var hourEl = $(".hour");
-var descriptionEl = $(".description");
+var todo = $(".description");
 var saveBtnEl = $(".saveBtn");
 
 var now = dayjs().hour();
@@ -26,7 +31,11 @@ $(function () {
     // useful when saving the description in local storage?
     //
     saveBtnEl.on("click", function (){
+    //descriptionEl.textcontent -> setLocalStorage
+      todo = $(this).siblings(".description").val();
+      var hour = $(this).parent().attr("id");
 
+      localStorage.setItem(hour, todo);
 
     });
 
@@ -36,21 +45,36 @@ $(function () {
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
     //
-
-    /* if (hour < now){
-      setAttribute("class", "past");
-
-    }else if (hour == now){
-      setAttribute("class", "present");
-    }else{
-      setAttribute("class", "future");
-    }
-    */
-
+    $(".time-block").each(function () {
+      var hours = parseInt(this.id.split("hour")[0]);
+      if (hours < now){
+        $(this).removeClass("present");
+        $(this).removeClass("future");
+        $(this).addClass("past");
+      }else if (hours === now){
+        $(this).removeClass("past");
+        $(this).removeClass("future");
+        $(this).addClass("present");
+      }else{
+        $(this).removeClass("past");
+        $(this).removeClass("present");
+        $(this).addClass("future");
+      }
+    
+    })
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
+    hour9.children(".description").val(localStorage.getItem("hour-9"));
+    hour10.children(".description").val(localStorage.getItem("hour-10"));
+    hour11.children(".description").val(localStorage.getItem("hour-11"));
+    hour12.children(".description").val(localStorage.getItem("hour-12"));
+    hour13.children(".description").val(localStorage.getItem("hour-13"));
+    hour14.children(".description").val(localStorage.getItem("hour-14"));
+    hour15.children(".description").val(localStorage.getItem("hour-15"));
+    hour16.children(".description").val(localStorage.getItem("hour-16"));
+    hour17.children(".description").val(localStorage.getItem("hour-17"));
 
     // TODO: Add code to display the current date in the header of the page.
 
