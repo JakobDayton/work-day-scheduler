@@ -46,12 +46,13 @@ $(function () {
     // current hour in 24-hour time?
     //
     $(".time-block").each(function () {
-      var hours = parseInt(this.id.split("hour")[0]);
-      if (hours < now){
+      var hours = dayjs().format("H");
+      var divHours = parseInt($(this).attr("id").split("hour")[1]);
+      if (divHours < hours){
         $(this).removeClass("present");
         $(this).removeClass("future");
         $(this).addClass("past");
-      }else if (hours === now){
+      }else if (divHours == hours){
         $(this).removeClass("past");
         $(this).removeClass("future");
         $(this).addClass("present");
